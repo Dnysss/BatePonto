@@ -39,6 +39,16 @@ export class UserService {
         'Este email já está cadastrado no sistema. Tente cadastrar outro email.',
       );
     }
+
+    // valida cpf
+    const cpfValid = await this.findCpf(createUserDTO.cpf).catch(
+      () => undefined,
+    );
+
+    if (cpfValid) {
+      throw new BadGatewayException('Este CPF já está cadastrado no sistema.');
+    }
+
     // Criar hash da senha e salvar o novo usuário no banco de dados
     const passwordHashed = await createPasswordHashed(createUserDTO.password);
 
@@ -70,6 +80,20 @@ export class UserService {
 
     if (!user) {
       throw new NotFoundException(`UserId: ${userId} not found.`);
+    }
+
+    return user;
+  }
+
+  async findCpf(cpf: string): Promise<UserEntity> {
+    const user = await this.userRepository.findOne({
+      where: {
+        cpf,
+      },
+    });
+
+    if (!user) {
+      throw new NotFoundException(`CPF: ${cpf} not found.`);
     }
 
     return user;

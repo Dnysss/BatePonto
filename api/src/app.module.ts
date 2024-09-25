@@ -4,6 +4,7 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
+import { RegisterPointModule } from './register-point/register-point.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { JwtModule } from '@nestjs/jwt';
     UserModule,
     JwtModule,
     AuthModule,
+    RegisterPointModule,
   ],
   controllers: [],
   providers: [],

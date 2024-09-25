@@ -1,7 +1,9 @@
+import { RegisterPointEntity } from 'src/register-point/entities/register-point.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -17,6 +19,9 @@ export class UserEntity {
   @Column({ name: 'email', nullable: false })
   email: string;
 
+  @Column({ name: 'cpf', nullable: false })
+  cpf: string;
+
   @Column({ name: 'password', nullable: false })
   password: string;
 
@@ -28,4 +33,10 @@ export class UserEntity {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updateAt: Date;
+
+  @OneToMany(
+    () => RegisterPointEntity,
+    (registerPoint: RegisterPointEntity) => registerPoint.user,
+  )
+  registerPoints?: RegisterPointEntity[];
 }

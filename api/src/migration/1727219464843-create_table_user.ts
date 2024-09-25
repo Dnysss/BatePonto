@@ -7,6 +7,7 @@ export class CreateTableUser1727219464843 implements MigrationInterface {
                 id integer NOT NULL,
                 name character varying NOT NULL,
                 email  character varying NOT NULL,
+                cpf  character varying NOT NULL,
                 password  character varying NOT NULL,
                 type_user int NOT NULL,
                 created_at timestamp without time zone DEFAULT now() NOT NULL,
